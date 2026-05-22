@@ -2,6 +2,7 @@ package jbang.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,7 +45,7 @@ public final class SourceResolver {
                         .orElse(cwd.resolve(filename))
                         .toAbsolutePath()
                         .normalize();
-            } catch (IOException e) {
+            } catch (IOException | UncheckedIOException e) {
                 return cwd.resolve(filename).toAbsolutePath().normalize();
             }
         }
